@@ -14,7 +14,7 @@
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
             --accent-blue: #0ea5e9;
-            --accent-glow: rgba(14, 165, 233, 0.5);
+            --accent-glow: rgba(14, 165, 233, 0.15); /* Reduced neon glow opacity */
             --border-color: #1e293b;
             --code-bg: #030610;
         }
@@ -25,17 +25,20 @@
         /* Navigation */
         nav {
             background: rgba(13, 19, 38, 0.85); backdrop-filter: blur(12px);
-            padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 2rem; display: flex; justify-content: center; align-items: center; /* Centered Nav Links */
             border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
         }
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: 0.5px; }
+        
+        /* Adjusted Logo: Removed bold, softened text */
+        .logo { position: absolute; left: 2rem; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.5px; opacity: 0.9; color: var(--text-main); }
         .logo span { color: var(--accent-blue); }
-        .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+        
+        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
         .nav-btn {
             background: none; border: none; color: var(--text-muted); font-size: 1rem; font-weight: 600;
             cursor: pointer; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 6px;
         }
-        .nav-btn:hover, .nav-btn.active { color: var(--accent-blue); text-shadow: 0 0 10px var(--accent-glow); background: rgba(14, 165, 233, 0.1); }
+        .nav-btn:hover, .nav-btn.active { color: var(--accent-blue); text-shadow: 0 0 8px var(--accent-glow); background: rgba(14, 165, 233, 0.1); }
 
         /* Layout Container */
         .container { max-width: 1250px; margin: 0 auto; padding: 3rem 2rem; }
@@ -45,15 +48,14 @@
 
         /* Typography */
         h1 { font-size: 3.5rem; margin-bottom: 0.5rem; color: #fff; line-height: 1.2; letter-spacing: -1px; }
-        h1.subtitle { font-size: 1.5rem; color: var(--text-muted); font-weight: 400; margin-bottom: 2rem; letter-spacing: 1px; }
         h2 { font-size: 2.2rem; color: var(--accent-blue); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;}
         h3 { font-size: 1.5rem; color: #fff; margin-top: 2rem; margin-bottom: 1rem; }
         h4 { font-size: 1.2rem; color: var(--accent-blue); margin-top: 1.5rem; margin-bottom: 0.8rem; }
         p { margin-bottom: 1.2rem; color: var(--text-muted); font-size: 1.05rem; }
-        .highlight { color: var(--accent-blue); text-shadow: 0 0 15px var(--accent-glow); }
+        .highlight { color: var(--accent-blue); text-shadow: 0 0 10px var(--accent-glow); }
 
         /* Panels & Cards */
-        .panel { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 10px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); }
+        .panel { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 10px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); } 
         .code-box { background-color: var(--code-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 1rem; font-family: 'Courier New', Courier, monospace; color: #a5b4fc; overflow-x: auto; margin-bottom: 1.5rem; font-size: 0.9rem; }
         ul { margin-bottom: 1.5rem; margin-left: 1.5rem; color: var(--text-muted); }
         li { margin-bottom: 0.7rem; }
@@ -67,7 +69,7 @@
         
         .proj-tab-btn { background: var(--bg-panel-light); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.6rem 1.2rem; border-radius: 20px; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
         .proj-tab-btn:hover { border-color: var(--accent-blue); color: var(--text-main); }
-        .proj-tab-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); box-shadow: 0 0 15px var(--accent-glow); }
+        .proj-tab-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); box-shadow: 0 0 10px var(--accent-glow); } 
         .proj-content { display: none; }
         .proj-content.active { display: block; animation: fadeIn 0.4s; }
 
@@ -94,49 +96,82 @@
         .fp { background: rgba(225, 29, 72, 0.4); }
         .fn { background: rgba(225, 29, 72, 0.6); }
 
+        /* Custom Button Styling */
+        .btn-primary {
+            background: var(--accent-blue); color: white; border: 1px solid var(--accent-blue); 
+            padding: 0.8rem 2rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; 
+            cursor: pointer; box-shadow: 0 0 12px var(--accent-glow); transition: all 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 16px rgba(14, 165, 233, 0.3); }
+        
+        .btn-secondary {
+            background: transparent; color: var(--accent-blue); border: 2px solid var(--accent-blue); 
+            padding: 0.8rem 2rem; font-size: 1.05rem; font-weight: 600; border-radius: 6px; 
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-secondary:hover { background: rgba(14, 165, 233, 0.1); transform: translateY(-2px); }
+
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Amogh<span>_</span>Samji</div>
+        <div class="logo">Amogh Samji</div>
         <div class="nav-links">
             <button class="nav-btn active" onclick="switchPage('home')">Home</button>
             <button class="nav-btn" onclick="switchPage('about')">About Me</button>
-            <button class="nav-btn" onclick="switchPage('courses')">Courses</button>
-            <button class="nav-btn" onclick="switchPage('projects')">Projects</button>
+            <button class="nav-btn" onclick="switchPage('courses')">My Course</button>
+            <button class="nav-btn" onclick="switchPage('projects')">My Project</button>
         </div>
     </nav>
 
     <div class="container">
         
         <section id="home" class="page-section active">
-            <h1>Machine Learning <span class="highlight">Portfolio</span></h1>
-            <h1 class="subtitle">by Amogh Samji</h1>
-            <p style="font-size: 1.3rem; max-width: 700px; color: var(--text-main);">Computer Science Student building robust machine learning architectures, diving deep into data science, and solving complex algorithmic challenges.</p>
-            <p style="max-width: 650px; margin-top: 1rem;">My passion lies in extracting hidden signals from raw data. Whether it's crafting deterministic imputation logic, tuning heavy-duty gradient boosters, or managing complex tabular datasets, I build models that scale and perform.</p>
-            <div style="margin-top: 2.5rem;">
-                <button onclick="switchPage('projects')" style="background: var(--accent-blue); color: white; border: none; padding: 0.8rem 2.5rem; font-size: 1.1rem; font-weight: 600; border-radius: 6px; cursor: pointer; box-shadow: 0 0 20px var(--accent-glow); transition: transform 0.2s;">View Deep Dive Project</button>
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 65vh;">
+                
+                <h1 style="font-size: 4.5rem; margin-bottom: 0.5rem;">Machine Learning <span class="highlight">Portfolio</span></h1>
+                
+                <p style="font-size: 1.3rem; color: var(--text-muted); font-style: italic; letter-spacing: 0.5px; margin-bottom: 3rem;">
+                    Under the Guidance of <span style="color: var(--text-main); font-weight: 600;">Ms. Neha Tarannum</span>, Professor — Dept. of CSE.
+                </p>
+                
+                <div style="display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;">
+                    <button onclick="switchPage('courses')" class="btn-secondary">View About my course</button>
+                    <button onclick="switchPage('projects')" class="btn-primary">View my Project</button>
+                </div>
+
             </div>
         </section>
 
         <section id="about" class="page-section">
             <h2>About Me</h2>
             <div class="panel">
-                <p>I am a second-year Computer Science student at <strong>KLE Technological University</strong> in Hubballi, Karnataka. I have a solid foundation in programming languages like C, C++, and SQL, paired with a deep, practical interest in Machine Learning, Neural Networks, and Data Science.</p>
-                <p>Beyond the standard academic curriculum, I thrive on complex problem-solving. I am passionate about applying graph theory algorithms to real-world locations, building multi-client networking protocols, and actively competing in Kaggle data science competitions. My approach to AI blends mathematical intuition with rigorous feature engineering to push predictive modeling to the absolute limit.</p>
+                <h3 style="margin-top: 0; font-size: 2rem; color: var(--text-main);">Amogh Samji</h3>
+                <p class="highlight" style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1.5rem;">Computer Science Undergraduate | KLE Technological University</p>
+                
+                <p>I am a second-year Computer Science student at <strong>KLE Technological University</strong> in Hubballi, Karnataka. Driven by a deep curiosity for data and algorithms, my academic journey is intensely focused on the intersection of Machine Learning, Neural Networks, and Data Science.</p>
+                
+                <p>Beyond the standard curriculum, I actively seek out complex computational challenges. My technical interests span across building predictive models, optimizing highly categorical tabular datasets, and participating in competitive data science platforms like Kaggle. I also maintain a strong programming foundation in <strong>C, C++, and SQL</strong>, ensuring my models are backed by efficient, scalable code.</p>
+                
+                <h4 style="color: var(--accent-blue); margin-top: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: inline-block;">Current Focus Areas</h4>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Predictive Modeling & Ensembles:</strong> Tuning heavy-duty gradient boosters (XGBoost, LightGBM, CatBoost) to extract signals from noisy data.</li>
+                    <li><strong>Feature Engineering & Imputation:</strong> Designing deterministic imputation logic and mathematical relationships to improve model baseline accuracy without relying blindly on statistical averages.</li>
+                    <li><strong>Algorithmic Problem Solving:</strong> Applying graph theory to real-world mapping and developing multi-client networking protocols.</li>
+                </ul>
             </div>
         </section>
 
         <section id="courses" class="page-section">
-            <h2>Courses & Certifications</h2>
+            <h2>My Course</h2>
             <div class="panel">
-                <p><em>Course details are currently being updated. Check back soon for a comprehensive list of my academic progress and technical certifications.</em></p>
+                <p><em>Will be updated shortly.</em></p>
             </div>
         </section>
 
         <section id="projects" class="page-section">
-            <h2>Spaceship Titanic: A Machine Learning Deep Dive</h2>
+            <h2>My Project: Spaceship Titanic (Machine Learning)</h2>
             <p>A comprehensive walkthrough of my journey scaling the Kaggle Leaderboard to <strong>81.4% Accuracy</strong>.</p>
             
             <div class="panel">
@@ -325,7 +360,12 @@ model = xgb.XGBClassifier(**params_XGB)
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            
+            // Find the matching nav button to highlight
+            const navButtons = Array.from(document.querySelectorAll('.nav-btn'));
+            const activeButton = navButtons.find(btn => btn.getAttribute('onclick').includes(pageId));
+            if(activeButton) activeButton.classList.add('active');
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
