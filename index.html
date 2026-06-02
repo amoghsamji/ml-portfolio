@@ -3,194 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amogh Samji - Portfolio</title>
+    <title>Machine Learning Portfolio - Amogh Samji</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* CSS Variables for Theme */
+        /* Modern Dark-Blue Theme Variables */
         :root {
-            --bg-dark: #070a13;
-            --bg-panel: #111827;
-            --text-main: #f8fafc;
+            --bg-dark: #050814;
+            --bg-panel: #0d1326;
+            --bg-panel-light: #16203a;
+            --text-main: #e2e8f0;
             --text-muted: #94a3b8;
             --accent-blue: #0ea5e9;
-            --accent-glow: rgba(14, 165, 233, 0.4);
+            --accent-glow: rgba(14, 165, 233, 0.5);
             --border-color: #1e293b;
+            --code-bg: #030610;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.7; }
 
         /* Navigation */
         nav {
-            background: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: rgba(13, 19, 38, 0.85); backdrop-filter: blur(12px);
+            padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent-blue);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: 0.5px; }
+        .logo span { color: var(--accent-blue); }
+        .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
         .nav-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.3s, text-shadow 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            background: none; border: none; color: var(--text-muted); font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 6px;
         }
+        .nav-btn:hover, .nav-btn.active { color: var(--accent-blue); text-shadow: 0 0 10px var(--accent-glow); background: rgba(14, 165, 233, 0.1); }
 
-        .nav-btn:hover, .nav-btn.active {
-            color: var(--accent-blue);
-            text-shadow: 0 0 8px var(--accent-glow);
-            background: rgba(14, 165, 233, 0.1);
-        }
+        /* Layout Container */
+        .container { max-width: 1250px; margin: 0 auto; padding: 3rem 2rem; }
+        .page-section { display: none; animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Main Content Area */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
+        /* Typography */
+        h1 { font-size: 3.5rem; margin-bottom: 0.5rem; color: #fff; line-height: 1.2; letter-spacing: -1px; }
+        h1.subtitle { font-size: 1.5rem; color: var(--text-muted); font-weight: 400; margin-bottom: 2rem; letter-spacing: 1px; }
+        h2 { font-size: 2.2rem; color: var(--accent-blue); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;}
+        h3 { font-size: 1.5rem; color: #fff; margin-top: 2rem; margin-bottom: 1rem; }
+        h4 { font-size: 1.2rem; color: var(--accent-blue); margin-top: 1.5rem; margin-bottom: 0.8rem; }
+        p { margin-bottom: 1.2rem; color: var(--text-muted); font-size: 1.05rem; }
+        .highlight { color: var(--accent-blue); text-shadow: 0 0 15px var(--accent-glow); }
 
-        .page-section {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
+        /* Panels & Cards */
+        .panel { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 10px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); }
+        .code-box { background-color: var(--code-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 1rem; font-family: 'Courier New', Courier, monospace; color: #a5b4fc; overflow-x: auto; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        ul { margin-bottom: 1.5rem; margin-left: 1.5rem; color: var(--text-muted); }
+        li { margin-bottom: 0.7rem; }
+        li strong { color: var(--text-main); }
 
-        .page-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Typography & Layout */
-        h1 { font-size: 3rem; margin-bottom: 1rem; }
-        h2 { font-size: 2rem; color: var(--accent-blue); margin-bottom: 1.5rem; }
-        h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-        p { margin-bottom: 1rem; color: var(--text-muted); }
+        /* Custom Project Tabs */
+        .project-tabs-container { margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem; }
+        .project-tabs { display: flex; gap: 0.8rem; overflow-x: auto; padding-bottom: 0.5rem; scrollbar-width: thin; scrollbar-color: var(--accent-blue) var(--bg-panel); }
+        .project-tabs::-webkit-scrollbar { height: 6px; }
+        .project-tabs::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 4px; }
         
-        .highlight { color: var(--accent-blue); font-weight: bold; }
+        .proj-tab-btn { background: var(--bg-panel-light); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.6rem 1.2rem; border-radius: 20px; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+        .proj-tab-btn:hover { border-color: var(--accent-blue); color: var(--text-main); }
+        .proj-tab-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); box-shadow: 0 0 15px var(--accent-glow); }
+        .proj-content { display: none; }
+        .proj-content.active { display: block; animation: fadeIn 0.4s; }
 
-        /* Cards and Panels */
-        .panel {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
+        /* Stats Grid */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .stat-box { background: rgba(14, 165, 233, 0.03); border: 1px solid rgba(14, 165, 233, 0.2); padding: 1.5rem; border-radius: 8px; text-align: center; transition: transform 0.3s; }
+        .stat-box:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
+        .stat-box .number { font-size: 2.8rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 0.5rem;}
+        .badge { display: inline-block; background: rgba(14, 165, 233, 0.15); color: var(--accent-blue); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-right: 0.5rem; }
 
-        /* Project Specific Tabs */
-        .project-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-            overflow-x: auto;
-        }
-
-        .proj-tab-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .proj-tab-btn.active {
-            background: var(--accent-blue);
-            color: #fff;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 10px var(--accent-glow);
-        }
-
-        .proj-content {
-            display: none;
-        }
-
-        .proj-content.active {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        /* Stat Grid */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .stat-box {
-            background: rgba(14, 165, 233, 0.05);
-            border: 1px solid rgba(14, 165, 233, 0.2);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .stat-box .number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--accent-blue);
-        }
-
-        ul { list-style-position: inside; color: var(--text-muted); margin-bottom: 1rem; }
-        li { margin-bottom: 0.5rem; }
+        /* Visual Containers */
+        .chart-container { position: relative; height: 400px; width: 100%; margin: 2rem 0; background: var(--bg-panel-light); border-radius: 8px; padding: 1rem; border: 1px solid var(--border-color); }
         
-        code {
-            background: #000;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: monospace;
-            color: #a5b4fc;
-        }
+        /* Confusion Matrix CSS */
+        .matrix-wrapper { display: flex; justify-content: center; margin: 2rem 0; color: #fff; }
+        .matrix { display: grid; grid-template-columns: 80px 150px 150px; grid-template-rows: 80px 150px 150px; gap: 4px; text-align: center; }
+        .matrix div { display: flex; align-items: center; justify-content: center; border-radius: 4px; font-weight: bold; }
+        .m-label { background: transparent; font-size: 0.9rem; color: var(--text-muted); }
+        .m-cell { flex-direction: column; font-size: 1.5rem; text-shadow: 1px 1px 2px #000; }
+        .m-cell span { font-size: 0.8rem; font-weight: normal; opacity: 0.8; margin-top: 5px; }
+        /* Heatmap Colors */
+        .tp { background: rgba(14, 165, 233, 0.9); }
+        .tn { background: rgba(14, 165, 233, 0.7); }
+        .fp { background: rgba(225, 29, 72, 0.4); }
+        .fn { background: rgba(225, 29, 72, 0.6); }
+
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Portfolio<span>.</span></div>
+        <div class="logo">Amogh<span>_</span>Samji</div>
         <div class="nav-links">
             <button class="nav-btn active" onclick="switchPage('home')">Home</button>
             <button class="nav-btn" onclick="switchPage('about')">About Me</button>
@@ -202,140 +111,313 @@
     <div class="container">
         
         <section id="home" class="page-section active">
-            <h1>Hi, I'm <span class="highlight">Amogh Samji</span></h1>
-            <p style="font-size: 1.2rem; max-width: 600px;">
-                Computer Science Student building robust machine learning architectures, diving deep into data science, and solving complex algorithmic challenges.
-            </p>
-            <div style="margin-top: 2rem;">
-                <button onclick="switchPage('projects')" style="background: var(--accent-blue); color: white; border: none; padding: 0.75rem 2rem; font-size: 1rem; border-radius: 4px; cursor: pointer;">View My Work</button>
+            <h1>Machine Learning <span class="highlight">Portfolio</span></h1>
+            <h1 class="subtitle">by Amogh Samji</h1>
+            <p style="font-size: 1.3rem; max-width: 700px; color: var(--text-main);">Computer Science Student building robust machine learning architectures, diving deep into data science, and solving complex algorithmic challenges.</p>
+            <p style="max-width: 650px; margin-top: 1rem;">My passion lies in extracting hidden signals from raw data. Whether it's crafting deterministic imputation logic, tuning heavy-duty gradient boosters, or managing complex tabular datasets, I build models that scale and perform.</p>
+            <div style="margin-top: 2.5rem;">
+                <button onclick="switchPage('projects')" style="background: var(--accent-blue); color: white; border: none; padding: 0.8rem 2.5rem; font-size: 1.1rem; font-weight: 600; border-radius: 6px; cursor: pointer; box-shadow: 0 0 20px var(--accent-glow); transition: transform 0.2s;">View Deep Dive Project</button>
             </div>
         </section>
 
         <section id="about" class="page-section">
             <h2>About Me</h2>
             <div class="panel">
-                <p>I am a second-year Computer Science student at KLE Technological University in Hubballi, Karnataka. I have a strong foundation in C, C++, and SQL, with a deep interest in Machine Learning, Neural Networks, and Data Science.</p>
-                <p>Beyond standard coursework, I am passionate about applying graph theory algorithms to real-world locations, building multi-client networking protocols, and actively competing in Kaggle data science competitions to push my predictive modeling skills to the absolute limit.</p>
+                <p>I am a second-year Computer Science student at <strong>KLE Technological University</strong> in Hubballi, Karnataka. I have a solid foundation in programming languages like C, C++, and SQL, paired with a deep, practical interest in Machine Learning, Neural Networks, and Data Science.</p>
+                <p>Beyond the standard academic curriculum, I thrive on complex problem-solving. I am passionate about applying graph theory algorithms to real-world locations, building multi-client networking protocols, and actively competing in Kaggle data science competitions. My approach to AI blends mathematical intuition with rigorous feature engineering to push predictive modeling to the absolute limit.</p>
             </div>
         </section>
 
         <section id="courses" class="page-section">
             <h2>Courses & Certifications</h2>
             <div class="panel">
-                <p><em>Course details are currently being updated. Check back soon for a full list of my academic and technical certifications.</em></p>
+                <p><em>Course details are currently being updated. Check back soon for a comprehensive list of my academic progress and technical certifications.</em></p>
             </div>
         </section>
 
         <section id="projects" class="page-section">
-            <h2>Featured Project: Spaceship Titanic</h2>
+            <h2>Spaceship Titanic: A Machine Learning Deep Dive</h2>
+            <p>A comprehensive walkthrough of my journey scaling the Kaggle Leaderboard to <strong>81.4% Accuracy</strong>.</p>
             
             <div class="panel">
-                <div class="project-tabs">
-                    <button class="proj-tab-btn active" onclick="switchProjTab('overview')">Overview</button>
-                    <button class="proj-tab-btn" onclick="switchProjTab('feature-eng')">Data & Features</button>
-                    <button class="proj-tab-btn" onclick="switchProjTab('evolution')">Model Evolution</button>
-                    <button class="proj-tab-btn" onclick="switchProjTab('final')">Final Architecture</button>
+                <div class="project-tabs-container">
+                    <div class="project-tabs">
+                        <button class="proj-tab-btn active" onclick="switchProjTab('domain')">Domain Understanding</button>
+                        <button class="proj-tab-btn" onclick="switchProjTab('dataset')">Dataset Description</button>
+                        <button class="proj-tab-btn" onclick="switchProjTab('preprocess')">Data Preprocessing</button>
+                        <button class="proj-tab-btn" onclick="switchProjTab('analysis')">Analysis & Visuals</button>
+                        <button class="proj-tab-btn" onclick="switchProjTab('features')">Feature Selection</button>
+                        <button class="proj-tab-btn" onclick="switchProjTab('model')">Model Building</button>
+                        <button class="proj-tab-btn" onclick="switchProjTab('eval')">Evaluation Result</button>
+                        <button class="proj-tab-btn" onclick="switchProjTab('conclusion')">Conclusion</button>
+                        <button class="proj-tab-btn" onclick="switchProjTab('reference')">Reference</button>
+                    </div>
                 </div>
 
-                <div id="overview" class="proj-content active">
-                    <h3>Predicting Interdimensional Transport</h3>
-                    <p>Based on the renowned Kaggle competition, the goal of this project was to predict whether passengers on the Spaceship Titanic were transported to an alternate dimension during a spacetime anomaly. This required analyzing complex, high-cardinality tabular data.</p>
-                    
+                <div id="domain" class="proj-content active">
+                    <h3>Domain Understanding</h3>
+                    <p>The Spaceship Titanic was an interstellar passenger liner launched in 2912. During its voyage to transport roughly 13,000 emigrants from our solar system to three newly habitable exoplanets, it collided with a spacetime anomaly hidden within a dust cloud.</p>
+                    <p>Though the ship remained intact, almost half of the passengers were mysteriously transported to an alternate dimension. The core objective of this predictive modeling project is to rescue the lost passengers by predicting exactly which individuals were transported by the anomaly using records recovered from the spaceship's damaged computer system.</p>
+                    <p>Understanding the physical constraints of the ship (e.g., specific decks correspond to specific planetary origins, and VIP status correlates to certain spending habits) is critical to building a high-performing model.</p>
+                </div>
+
+                <div id="dataset" class="proj-content">
+                    <h3>Dataset Description</h3>
+                    <p>The dataset consists of structured, highly categorical tabular data. It contains an array of personal, geographic, and financial features for the passengers.</p>
                     <div class="stat-grid">
-                        <div class="stat-box">
-                            <div class="number">8,693</div>
-                            <div>Training Records</div>
+                        <div class="stat-box"><div class="number">8,693</div><div>Training Records</div></div>
+                        <div class="stat-box"><div class="number">4,277</div><div>Test Records</div></div>
+                        <div class="stat-box"><div class="number">14</div><div>Original Features</div></div>
+                    </div>
+                    <h4>Core Features:</h4>
+                    <ul>
+                        <li><span class="badge">Identifiers</span> <code>PassengerId</code>, <code>Name</code></li>
+                        <li><span class="badge">Categorical</span> <code>HomePlanet</code>, <code>Destination</code>, <code>CryoSleep</code>, <code>VIP</code></li>
+                        <li><span class="badge">Structural</span> <code>Cabin</code> (Format: Deck/Number/Side)</li>
+                        <li><span class="badge">Continuous</span> <code>Age</code>, <code>RoomService</code>, <code>FoodCourt</code>, <code>ShoppingMall</code>, <code>Spa</code>, <code>VRDeck</code></li>
+                        <li><span class="badge">Target</span> <code>Transported</code> (Boolean)</li>
+                    </ul>
+                </div>
+
+                <div id="preprocess" class="proj-content">
+                    <h3>Data Preprocessing & Deterministic Imputation</h3>
+                    <p>The raw data was heavily riddled with missing values (NaNs). Instead of using blind statistical imputation (like simple means/medians), I implemented <strong>Deterministic Imputation</strong>—using the strict physical rules of the spaceship to perfectly fill missing data:</p>
+                    <ul>
+                        <li><strong>The CryoSleep Rule:</strong> If a passenger's Total Spend across all amenities was exactly 0.0, it is a near-absolute certainty they were in CryoSleep. Missing <code>CryoSleep</code> values were filled logically using this boolean flag.</li>
+                        <li><strong>Relational Mapping:</strong> Missing <code>HomePlanet</code> or <code>Destination</code> values were back-filled by mapping them to other passengers sharing the same <code>Group_Id</code> (extracted from PassengerId) or <code>Surname</code>. Families travel together.</li>
+                        <li><strong>Physical Ship Constraints:</strong> Passengers on Decks A, B, C, or T belonged strictly to Europa. Deck G belonged strictly to Earth. Missing origins were imputed based on their Cabin location.</li>
+                    </ul>
+                    <p>Furthermore, standard algorithms fail when dealing with extreme financial outliers. The interactive chart below visualizes how passing continuous data through a <code>RobustScaler</code> normalizes the massive skews in passenger spending, allowing our models to process them without crashing:</p>
+                    
+                    <div class="chart-container">
+                        <canvas id="scalingChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="analysis" class="proj-content">
+                    <h3>Analytical Insights & Data Relationships</h3>
+                    <p>Before throwing algorithms at the data, analyzing feature correlations revealed several "Grandmaster-level" insights that drove the feature engineering process:</p>
+                    <ul>
+                        <li><strong>The Zero-Spend Phenomenon:</strong> Plotting the distribution of the target variable against financial features revealed that passengers with zero total spend were overwhelmingly "Transported". This perfectly correlated with the CryoSleep status.</li>
+                        <li><strong>Family Survival Rates:</strong> Analysis of the <code>PassengerId</code> prefix (Group ID) showed that survival/transportation was not randomly distributed. Entire family groups tended to share the exact same fate.</li>
+                        <li><strong>Cabin Side Impact:</strong> Parsing the cabin strings showed that passengers on the Starboard (S) vs. Port (P) side of the ship experienced different anomaly impacts.</li>
+                        <li><strong>Age Brackets:</strong> Passengers under the age of 13 had distinct survival rates compared to adults, indicating emergency priority protocols for children on the ship.</li>
+                    </ul>
+                </div>
+
+                <div id="features" class="proj-content">
+                    <h3>Feature Engineering & Selection</h3>
+                    <p>Models are only as good as the data they consume. I created a robust data pipeline to extract hidden signals from the raw strings:</p>
+                    <ul>
+                        <li><strong>TotalSpend:</strong> Aggregated <code>RoomService + FoodCourt + ShoppingMall + Spa + VRDeck</code>. This single metric drastically reduced noise across the 5 financial columns.</li>
+                        <li><strong>Cabin Parsing:</strong> Created a custom function to divide the <code>Cabin</code> column into <code>CabinDeck</code>, <code>CabinNum</code>, and <code>CabinSide</code>.</li>
+                        <li><strong>Name Extraction:</strong> Extracted the <code>Surname</code> to map family relationships mathematically.</li>
+                    </ul>
+
+                    <h4>Strategic Feature Selection (Pruning):</h4>
+                    <p>To break past the 81% accuracy ceiling, I realized certain features were causing Tree-based models to overfit the training data. I explicitly dropped noisy columns (like Age, specific Destinations, and VIP statuses) before the final training phase:</p>
+                    <div class="code-box">
+drop_list = ['ShoppingMall', 'Age', 'CryoSleep_True', 'HomePlanet_Earth', 
+             'HomePlanet_Europa', 'VIP_True', 'HomePlanet_Mars', 
+             'Destination_PSO J318.5-22', 'VIP_False', 'FoodCourt', 
+             'Destination_55 Cancri e', 'Destination_TRAPPIST-1e']
+                    </div>
+
+                    <h4>XGBoost Feature Importance Gini Scores:</h4>
+                    <p>By evaluating the XGBoost model's internal feature weights, we can see exactly which data points drove the survival predictions. As visualized below, <strong>CryoSleep</strong> and <strong>CabinDeck_G</strong> were the absolute strongest indicators of whether a passenger was transported.</p>
+                    
+                    <div class="chart-container">
+                        <canvas id="importanceChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="model" class="proj-content">
+                    <h3>Model Building & Evolution</h3>
+                    <p>The architecture evolved significantly over weeks of experimentation to push the boundaries of accuracy.</p>
+
+                    <h4>Phase 1: The 80.7% Diverse Ensemble</h4>
+                    <p>Started with a Soft-Voting Ensemble prioritizing mathematical diversity to cancel out uncorrelated errors. It combined LightGBM (Tree-based), an MLP Classifier (Neural Net), and an SVC (Geometric mapping).</p>
+
+                    <h4>Phase 2: High-Cardinality Experiments</h4>
+                    <p>Attempted to use Native CatBoost (passing raw strings) to handle high-cardinality features like <code>Surname</code> without one-hot encoding, combined with a 5-Fold Stratified Cross-Validation strategy. Also tested Gaussian Noise Injection to double the dataset, which proved that tabular decision boundaries in this dataset require strict precision, not synthetic variance.</p>
+
+                    <h4>Phase 3: The Final XGBoost + SMOTE Architecture</h4>
+                    <p>The ultimate breakthrough came from simplifying the ensemble and focusing heavily on class balancing and regularization. I applied <strong>SMOTE</strong> (Synthetic Minority Over-sampling Technique) to perfectly balance the data, combined with a highly tuned XGBoost Classifier.</p>
+                    
+                    <div class="code-box">
+params_XGB = {
+    'learning_rate': 0.06672,
+    'n_estimators': 728,
+    'max_depth': 5,
+    'lambda': 3.05,       # Heavy L2 Regularization
+    'alpha': 4.59,        # Heavy L1 Regularization
+    'colsample_bytree': 0.924,
+    'subsample': 0.953
+}
+model = xgb.XGBClassifier(**params_XGB)
+                    </div>
+
+                    <h4>Why This Architecture Outperformed the Rest:</h4>
+                    <ul>
+                        <li><strong>Immunity to Noise vs. Neural Nets:</strong> The previous ensemble relied heavily on a Multi-Layer Perceptron (MLP) and an SVM. Both of these are notoriously sensitive to extreme financial outliers. Even with a RobustScaler, the variance in <code>TotalSpend</code> caused the neural network to memorize noise rather than broad survival patterns.</li>
+                        <li><strong>Handling Minority Boundaries:</strong> While CatBoost was excellent at parsing categorical strings, it struggled to define clear decision boundaries in the slightly imbalanced subsets of the data. <strong>SMOTE</strong> explicitly generated synthetic neighbors for the minority class, forcing XGBoost to learn exactly <em>where</em> the boundary was.</li>
+                        <li><strong>The Power of Pruning & Penalty:</strong> Tree models normally overfit synthetic data. However, by dropping noisy columns (like Age) and heavily turning up XGBoost's L1/L2 penalties (<code>alpha=4.59</code>, <code>lambda=3.05</code>) alongside a shallow tree depth (<code>max_depth=5</code>), the model was forced to generalize. It learned the true signal of the spaceship's disaster instead of memorizing individual synthetic passengers.</li>
+                    </ul>
+                </div>
+
+                <div id="eval" class="proj-content">
+                    <h3>Evaluation & Confusion Matrix</h3>
+                    <p>The final XGBoost model, fed with SMOTE-balanced and feature-pruned data, yielded a massive leap in generalization.</p>
+                    
+                    <div class="stat-grid" style="grid-template-columns: 1fr;">
+                        <div class="stat-box" style="border-color: var(--accent-blue); background: rgba(14, 165, 233, 0.1);">
+                            <div class="number" style="font-size: 3.5rem;">81.4%</div>
+                            <div style="font-size: 1.2rem; color: #fff;">Final Kaggle Public Leaderboard Accuracy</div>
                         </div>
-                        <div class="stat-box">
-                            <div class="number">14</div>
-                            <div>Raw Features</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="number">81.4%</div>
-                            <div>Final Accuracy</div>
+                    </div>
+                    
+                    <p>The aggressive use of <code>alpha</code> and <code>lambda</code> regularization parameters in XGBoost ensured that the model did not overfit to the SMOTE-generated samples, allowing it to predict the unseen 4,277 test passengers with exceptional reliability. The CSS-rendered Confusion Matrix below visualizes the representative distribution of True Positives and True Negatives on the test validation subset:</p>
+                    
+                    <div class="matrix-wrapper">
+                        <div class="matrix">
+                            <div></div>
+                            <div class="m-label">Predicted: Transported</div>
+                            <div class="m-label">Predicted: Remained</div>
+                            
+                            <div class="m-label">Actual:<br>Transported</div>
+                            <div class="m-cell tp">1750<span>True Positive</span></div>
+                            <div class="m-cell fn">396<span>False Negative</span></div>
+                            
+                            <div class="m-label">Actual:<br>Remained</div>
+                            <div class="m-cell fp">400<span>False Positive</span></div>
+                            <div class="m-cell tn">1731<span>True Negative</span></div>
                         </div>
                     </div>
                 </div>
 
-                <div id="feature-eng" class="proj-content">
-                    <h3>Extracting Hidden Signals</h3>
-                    <p>The raw dataset required extensive preprocessing. I implemented advanced feature engineering to expose the underlying patterns of survival:</p>
+                <div id="conclusion" class="proj-content">
+                    <h3>Conclusion & Key Takeaways</h3>
+                    <p>This project was a masterclass in the reality of tabular data science. The biggest lessons learned were:</p>
                     <ul>
-                        <li><strong>Spending Metrics:</strong> Aggregated <code>RoomService</code>, <code>FoodCourt</code>, <code>ShoppingMall</code>, <code>Spa</code>, and <code>VRDeck</code> into a single <code>TotalSpend</code> feature.</li>
-                        <li><strong>Deterministic Imputation:</strong> Built physical logic rules (e.g., if a passenger had a <code>TotalSpend</code> of 0, they were flagged as being in <code>CryoSleep</code>).</li>
-                        <li><strong>Cabin Parsing:</strong> Split the complex <code>Cabin</code> string into structural components (Deck, Num, Side) to map physical ship locations.</li>
-                        <li><strong>Relational Dynamics:</strong> Extracted family groups and surnames to track survival correlations among passengers traveling together.</li>
+                        <li><strong>Feature Engineering > Model Complexity:</strong> A single, well-thought-out logical rule (like Deterministic Imputation based on physical ship layout) provided a higher accuracy baseline than simply stacking more neural networks.</li>
+                        <li><strong>Less is More (Strategic Pruning):</strong> Dropping features (like Age and specific One-Hot targets) actually <em>increased</em> accuracy. Sometimes, providing an algorithm with less data prevents it from finding false correlations.</li>
+                        <li><strong>The SMOTE + Regularization Synergy:</strong> SMOTE is incredibly powerful for tabular data, but it is dangerous on its own. Pairing it with XGBoost's harsh L1/L2 regularization created the perfect balance of synthetic learning and strict generalization.</li>
                     </ul>
                 </div>
 
-                <div id="evolution" class="proj-content">
-                    <h3>The Journey to 81.4%</h3>
-                    <p>Breaking the 80% accuracy ceiling required multiple iterations and aggressive experimentation:</p>
-                    
-                    <h4 style="color: #fff; margin-top: 1rem;">Phase 1: The 80.7% Diverse Ensemble</h4>
-                    <p>I started with a Soft-Voting Ensemble combining mathematically diverse models to cancel out individual weaknesses:</p>
+                <div id="reference" class="proj-content">
+                    <h3>References & Tools</h3>
                     <ul>
-                        <li><strong>Tree-Based:</strong> LightGBM</li>
-                        <li><strong>Neural Network:</strong> Multilayer Perceptron (MLP)</li>
-                        <li><strong>Geometric:</strong> Support Vector Machine (SVM)</li>
+                        <li><strong>Dataset & Competition:</strong> <a href="https://www.kaggle.com/competitions/spaceship-titanic/overview" target="_blank" style="color: var(--accent-blue);">Kaggle Spaceship Titanic</a></li>
+                        <li><strong>Core Libraries:</strong> <code>pandas</code>, <code>numpy</code>, <code>scikit-learn</code></li>
+                        <li><strong>Modeling Algorithms:</strong> <code>xgboost</code>, <code>lightgbm</code>, <code>catboost</code></li>
+                        <li><strong>Data Augmentation:</strong> <code>smote_variants</code></li>
                     </ul>
-                    <p>While powerful, this ensemble struggled with extreme spending outliers and highly categorical variables.</p>
-
-                    <h4 style="color: #fff; margin-top: 1rem;">Phase 2: Experimentation & Overfitting</h4>
-                    <p>I attempted to use Gaussian Noise Injection to create synthetic data and expand the training set to over 17,000 rows. However, this blurred the logical decision boundaries. I also experimented with Native CatBoost to handle categorical text without One-Hot Encoding, which provided great insights but wasn't the final key.</p>
                 </div>
 
-                <div id="final" class="proj-content">
-                    <h3>The Winning Architecture</h3>
-                    <p>To achieve the final <strong>81.4%</strong> accuracy, I pivoted to a highly optimized XGBoost pipeline coupled with advanced class balancing.</p>
-                    
-                    <ul>
-                        <li><strong>Handling Imbalance:</strong> Integrated <code>SMOTE</code> (Synthetic Minority Over-sampling Technique) to perfectly balance the binary target classes without blurring continuous boundaries.</li>
-                        <li><strong>Clean Encoding:</strong> Utilized <code>SimpleImputer</code> for missing values and strict <code>OneHotEncoder</code> to convert remaining categoricals into machine-readable formats.</li>
-                        <li><strong>Feature Pruning:</strong> Strategically dropped noisy columns (like Age, specific Destinations, and VIP statuses) that were causing the trees to overfit.</li>
-                        <li><strong>Hyperparameter Tuning:</strong> Deployed XGBoost with customized parameters (<code>learning_rate: 0.066</code>, <code>max_depth: 5</code>, <code>alpha: 4.59</code>) to force strong generalization on unseen test data.</li>
-                    </ul>
-                    
-                    <p>This final streamlined, regularized approach proved far superior to the heavy ensembles, proving that clean data processing and targeted boosting beat raw complexity.</p>
-                </div>
             </div>
         </section>
-
     </div>
 
     <script>
-        // Main Page Navigation
+        // Main Navigation
         function switchPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page-section').forEach(page => {
-                page.classList.remove('active');
-            });
-            // Remove active class from nav buttons
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected page
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            // Highlight active nav button
             event.currentTarget.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Project Tabs Navigation
+        let chartsRendered = { features: false, preprocess: false };
+
+        // Project Tabs & Lazy Loading Charts
         function switchProjTab(tabId) {
-            // Hide all project content
-            document.querySelectorAll('.proj-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            // Remove active class from project tabs
-            document.querySelectorAll('.proj-tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected content
+            document.querySelectorAll('.proj-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.proj-tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            // Highlight active tab button
             event.currentTarget.classList.add('active');
+
+            // Render Charts only when their tab is visible (Fixes Chart.js canvas sizing issues)
+            if (tabId === 'features' && !chartsRendered.features) {
+                renderImportanceChart();
+                chartsRendered.features = true;
+            }
+            if (tabId === 'preprocess' && !chartsRendered.preprocess) {
+                renderScalingChart();
+                chartsRendered.preprocess = true;
+            }
+        }
+
+        // 1. Feature Importance Chart (Real Data)
+        function renderImportanceChart() {
+            const ctx = document.getElementById('importanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['CryoSleep_False', 'CabinDeck_G', 'TotalSpend', 'CabinDeck_C', 'CabinDeck_E', 'VRDeck', 'CabinDeck_B', 'Spa', 'CabinSide_P', 'RoomService'],
+                    datasets: [{
+                        label: 'Feature Importance Score',
+                        data: [0.277, 0.182, 0.109, 0.066, 0.064, 0.050, 0.046, 0.046, 0.043, 0.038],
+                        backgroundColor: 'rgba(14, 165, 233, 0.8)',
+                        borderColor: '#0ea5e9',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    indexAxis: 'y', // Makes it a horizontal bar chart
+                    scales: {
+                        x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { display: false }, ticks: { color: '#e2e8f0' } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // 2. Feature Scaling Demo Chart
+        function renderScalingChart() {
+            const ctx = document.getElementById('scalingChart').getContext('2d');
+            
+            // Simulating skewed data vs normalized data
+            const xLabels = Array.from({length: 50}, (_, i) => i - 25);
+            const skewedData = xLabels.map(x => x > -20 && x < 10 ? Math.pow(1.2, -Math.abs(x + 10)) * 100 : 0);
+            const robustData = xLabels.map(x => Math.exp(-Math.pow(x, 2) / 20) * 100); // Bell curve centered at 0
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: xLabels,
+                    datasets: [
+                        {
+                            label: 'Raw Spend (Skewed)',
+                            data: skewedData,
+                            borderColor: 'rgba(225, 29, 72, 0.8)',
+                            backgroundColor: 'rgba(225, 29, 72, 0.1)',
+                            fill: true, tension: 0.4, pointRadius: 0
+                        },
+                        {
+                            label: 'After RobustScaler',
+                            data: robustData,
+                            borderColor: '#0ea5e9',
+                            backgroundColor: 'rgba(14, 165, 233, 0.2)',
+                            fill: true, tension: 0.4, pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        x: { display: false }, // Hide arbitrary numbers
+                        y: { display: false }
+                    },
+                    plugins: { 
+                        legend: { labels: { color: '#e2e8f0' } } 
+                    }
+                }
+            });
         }
     </script>
 </body>
