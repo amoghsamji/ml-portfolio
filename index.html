@@ -14,7 +14,7 @@
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
             --accent-blue: #0ea5e9;
-            --accent-glow: rgba(14, 165, 233, 0.15); /* Reduced neon glow opacity */
+            --accent-glow: rgba(14, 165, 233, 0.15);
             --border-color: #1e293b;
             --code-bg: #030610;
         }
@@ -25,11 +25,10 @@
         /* Navigation */
         nav {
             background: rgba(13, 19, 38, 0.85); backdrop-filter: blur(12px);
-            padding: 1.2rem 2rem; display: flex; justify-content: center; align-items: center; /* Centered Nav Links */
+            padding: 1.2rem 2rem; display: flex; justify-content: center; align-items: center; 
             border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
         }
         
-        /* Adjusted Logo: Removed bold, softened text */
         .logo { position: absolute; left: 2rem; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.5px; opacity: 0.9; color: var(--text-main); }
         .logo span { color: var(--accent-blue); }
         
@@ -164,9 +163,39 @@
         </section>
 
         <section id="courses" class="page-section">
-            <h2>My Course</h2>
-            <div class="panel">
-                <p><em>Will be updated shortly.</em></p>
+            <h2>My Course: Machine Learning</h2>
+            <p>Throughout my Machine Learning curriculum, I have built a rigorous theoretical and practical foundation—spanning from mathematical optimization to advanced ensemble methodologies. Below is a breakdown of my key learnings across the core units of the course.</p>
+            
+            <div class="panel" style="padding-top: 1.5rem;">
+                <h3 style="color: var(--accent-blue); margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Unit 1: Foundations of Deep Learning & Optimization</h3>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Linear Classifiers & Decision Boundaries:</strong> Mastered the geometry of linear classification, understanding exactly how feature weights define the orientation and biases dictate the position of decision boundaries using Sigmoid activations.</li>
+                    <li><strong>Gradient Descent Dynamics:</strong> Analyzed the mathematical behavior of loss functions. I learned to manually trace parameter updates and understood the critical impact of learning rate tuning on algorithmic convergence versus divergence.</li>
+                    <li><strong>Neural Networks & Backpropagation:</strong> Implemented end-to-end forward passes and backpropagation algorithms. Worked deeply with activation functions like ReLU and Sigmoid to compute hidden layer gradients and iteratively update weights.</li>
+                    <li><strong>Optimization Challenges:</strong> Explored the loss landscape, distinguishing between local minima and saddle points, and analyzed why the latter pose severe challenges in high-dimensional deep learning.</li>
+                    <li><strong>The Vanishing Gradient Problem:</strong> Used the chain rule to prove how deep networks utilizing standard Sigmoid activations suffer from exponentially decaying gradients, and studied modern solutions to overcome this.</li>
+                </ul>
+            </div>
+
+            <div class="panel" style="padding-top: 1.5rem;">
+                <h3 style="color: var(--accent-blue); margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Unit 2: Supervised Learning & Probabilistic Models</h3>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Model Complexity & Pruning:</strong> Studied the trade-offs of model complexity in tree-based algorithms, utilizing pre-pruning and post-pruning techniques to prevent overfitting and improve generalization on unseen data.</li>
+                    <li><strong>K-Nearest Neighbors (KNN) & Distance Metrics:</strong> Analyzed the geometric properties of KNN, evaluating how feature standardization scales spatial distances and dictates nearest-neighbor assignments.</li>
+                    <li><strong>The Curse of Dimensionality:</strong> Investigated the mathematical breakdown of distance metrics in high-dimensional spaces and why algorithms like KNN struggle with sparse data topologies.</li>
+                    <li><strong>Probabilistic Frameworks:</strong> Differentiated between Frequentist and Bayesian interpretations of probability, learning when to apply Bayesian priors to model uncertainty natively.</li>
+                    <li><strong>Multiclass Classification:</strong> Implemented Softmax functions to convert raw network logits into probability distributions, optimizing these models using Cross-Entropy Loss.</li>
+                </ul>
+            </div>
+
+            <div class="panel" style="padding-top: 1.5rem;">
+                <h3 style="color: var(--accent-blue); margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Unit 3: Ensemble Methods & Unsupervised Learning</h3>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Variance Reduction & Ensembles:</strong> Derived correlated variance formulas to mathematically prove why combining multiple weak learners reduces overall model variance and error.</li>
+                    <li><strong>Boosting Strategies:</strong> Mastered the inner workings of AdaBoost, deriving classifier weight formulas to understand how the algorithm penalizes errors and sequentially corrects itself.</li>
+                    <li><strong>Clustering Evaluation:</strong> Applied rigorous mathematical evaluation to unsupervised models by calculating Silhouette scores to measure intra-cluster cohesion versus inter-cluster separation.</li>
+                    <li><strong>Density-Based Spatial Clustering (DBSCAN):</strong> Mapped out non-linear data topologies by configuring epsilon (ε) and minimum points thresholds, correctly classifying core, border, and noise points without assuming predetermined cluster shapes.</li>
+                </ul>
             </div>
         </section>
 
@@ -254,7 +283,7 @@
                 </div>
 
                 <div id="model" class="proj-content">
-                    <h3>Model Evolution: The Journey to 82%</h3>
+                    <h3>Model Evolution: The Journey to ~82%</h3>
                     <p>The architecture evolved significantly over weeks of continuous experimentation, learning from each plateau to push the boundaries of accuracy.</p>
 
                     <h4>Phase 1: The 80.7% Baseline (Diverse Soft-Voting)</h4>
@@ -266,7 +295,7 @@
                     <strong>Why it worked:</strong> By heavily turning up XGBoost's L1/L2 penalties (alpha=4.59, lambda=3.05) and keeping the tree depth shallow, the model was forced to generalize. SMOTE helped define the minority class boundary.<br>
                     <strong>The Limitation:</strong> Tree models inherently overfit synthetic data eventually. While SMOTE pushed the score to 81.4%, the synthetic variance prevented the model from capturing the hyper-specific relational logic of the passenger families.</p>
 
-                    <h4>Phase 3: The ~82% Advanced Stacking Ensemble (Current)</h4>
+                    <h4>Phase 3: The ~82.0% Advanced Stacking Ensemble (Current)</h4>
                     <p>To shatter the 81.4% ceiling, I abandoned SMOTE and synthetic data entirely. Instead, I combined the new <strong>Group-Based Imputation</strong> and <strong>Log Transformations</strong> with a massive <strong>Multi-Seed, 5-Fold Stratified Stacking Ensemble</strong>.</p>
                     <ul>
                         <li><strong>The Base Learners (Level 0):</strong> I deployed five drastically different, highly-regularized algorithms: <code>ExtraTrees</code>, <code>HistGradientBoosting</code>, <code>XGBoost</code>, <code>LightGBM</code>, and Native <code>CatBoost</code>.</li>
